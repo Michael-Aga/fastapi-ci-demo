@@ -1,0 +1,29 @@
+name: CI
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Check out code
+      uses: actions/checkout@v4
+
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v3
+
+    - name: Build image
+      uses: docker/build-push-action@v5
+      with:
+        context: .
+        tags: fastapi-ci-demo:ci
+
+    - name: Run container & health-check
+      run: |
+        docker run -d -p 8000:8000 --name app fastapi-ci-demo:ci
+        sleep 3                       # give FastAPI a moment to boot
+        curl -f http://localhost:8000/ping | grep '"pong"'   # exits 1 if not found
