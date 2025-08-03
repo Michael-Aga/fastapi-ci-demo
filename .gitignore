@@ -1,0 +1,11 @@
+cat > .gitignore <<'EOF'
+# Byte-code & cache
+__pycache__/
+*.py[cod]
+
+# Virtual environments
+venv/
+
+# OS files
+.DS_Store
+EOF
