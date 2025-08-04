@@ -39,8 +39,8 @@ jobs:
         push: true                           # ← push to registry
         load: true                           # ← keep a local copy for tests
         tags: |
-          ghcr.io/${{ github.repository_owner }}/fastapi-ci-demo:latest
-          ghcr.io/${{ github.repository_owner }}/fastapi-ci-demo:${{ github.sha }}
+          ghcr.io/${{ steps.tolower.outputs.NS }}/fastapi-ci-demo:latest
+          ghcr.io/${{ steps.tolower.outputs.NS }}/fastapi-ci-demo:${{ github.sha }}
 
     # 5️⃣Spin up the image and hit /ping
     - name: Run container & health-check
