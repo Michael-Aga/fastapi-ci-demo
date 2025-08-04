@@ -45,6 +45,6 @@ jobs:
     # 5️⃣Spin up the image and hit /ping
     - name: Run container & health-check
       run: |
-        docker run -d -p 8000:8000 --name app ghcr.io/${{ github.repository_owner }}/fastapi-ci-demo:latest
+        docker run -d -p 8000:8000 --name app ghcr.io/${{ steps.tolower.outputs.NS }}/fastapi-ci-demo:latest
         sleep 3
         curl -f http://localhost:8000/ping | grep '"pong"'
