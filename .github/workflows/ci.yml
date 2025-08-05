@@ -48,3 +48,15 @@ jobs:
         docker run -d -p 8000:8000 --name app ghcr.io/${{ steps.tolower.outputs.NS }}/fastapi-ci-demo:latest
         sleep 3
         curl -f http://localhost:8000/ping | grep '"pong"'
+    # 6 Delpoyin the app on Fly
+    - name: Deploy to Fly.io
+      uses: superfly/flyctl-actions@v2
+      env:
+        FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+      with:
+        args: deploy \
+          --image ghcr.io/${{ steps.tolower.outputs.NS }}/fastapi-ci-demo:latest \
+          --app fastapi-ci-demo \
+          --region fra \
+          --yes
+
