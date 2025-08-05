@@ -54,9 +54,10 @@ jobs:
       env:
         FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
       with:
-        args: deploy \
-          --image ghcr.io/${{ steps.tolower.outputs.NS }}/fastapi-ci-demo:latest \
-          --app fastapi-ci-demo \
-          --region fra \
+        args: >
+          deploy
+          --image ghcr.io/${{ steps.tolower.outputs.NS }}/fastapi-ci-demo:latest
+          --app fastapi-ci-demo
+          --region fra
           --yes
 
