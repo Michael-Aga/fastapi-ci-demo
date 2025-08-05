@@ -58,6 +58,5 @@ jobs:
           deploy
           --image ghcr.io/${{ steps.tolower.outputs.NS }}/fastapi-ci-demo:latest
           --app fastapi-ci-demo
-          --region fra
           --yes
 
