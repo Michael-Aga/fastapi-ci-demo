@@ -12,6 +12,20 @@ image = "ghcr.io/michael-aga/fastapi-ci-demo:latest"
 [registry]
   auth_token = "GHCR_TOKEN"
 
+[deploy]
+  strategy = "bluegreen"         # or "canary"
+
+[[services]]
+  internal_port = 8000
+  protocol      = "tcp"
+
+  [[services.http_checks]]
+    interval = "10s"
+    grace_period = "5s"
+    method = "get"
+    path   = "/ping"
+    timeout = "2s"
+
 [http_service]
   internal_port = 8000
   force_https = true
