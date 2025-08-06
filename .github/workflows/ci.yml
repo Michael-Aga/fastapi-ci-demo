@@ -65,6 +65,7 @@ jobs:
       with:
         args: >
           deploy
+          --strategy bluegreen                     # Or canary
           --image ghcr.io/${{ steps.tolower.outputs.NS }}/fastapi-ci-demo:latest
           --app fastapi-ci-demo
           --yes
